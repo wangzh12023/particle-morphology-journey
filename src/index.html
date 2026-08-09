@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JL Particles</title>
+
+    <!-- 空 favicon: 告诉浏览器自己有 favicon 是空白的, 主动丢掉本地缓存的小人图标 -->
+    <link rel="icon" type="image/svg+xml" sizes="any" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'/>">
+
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@800&family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@400;700&family=Jost:wght@400;500;600;700&family=Saira+Condensed:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.typekit.net/cvn8slu.css">
+        <link rel="stylesheet" href="https://use.typekit.net/zda3gdw.css">
+
+
+    </head>
+<body>
+<!-- Pre-Loader Start-->
+<div id="preloader">
+    <div class="loader_line"></div>
+</div>
+<!-- Pre-Loader end -->
+
+<div>
+    <button id="play-button">
+        <i id="play-icon" class="fa fa-play"></i>
+        Play
+    </button>
+</div>
+
+<canvas class="webgl"></canvas>
+<img id="data-texture" src="" alt="">
+
+<!-- ★ 第 1 页大字: 直接在 body 下,inline style 强制 fixed(z-index 提到 9999) 钉死 viewport,
+       任何 CSS / HMR / Page.js 时序竞争都改不掉 (transform 不影响 fixed containing block) -->
+<div class="intro" style="position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100vh !important; z-index: 9999 !important; display: grid; place-items: center; text-align: center; pointer-events: none; will-change: auto !important;">
+    <h1 class="intro__title">
+        <span class="intro__title-pre">Morphology</span>
+        <span class="intro__title-sub">Particles<sup><small>2</small></sup></span>
+    </h1>
+    <span class="intro__info">Please scroll to follow the fox</span>
+</div>
+
+<div id="fake-scroll" >
+    <div class="wrapper">
+        <div class="smooth">
+            <section class="section section--intro">
+                <!-- 第 1 页大字 .intro 已移到 body 直接子元素 (避开 .smooth will-change 影响,直接 fixed 钉 viewport) -->
+            </section>
+
+            <!-- 第 2 页: flex-direction: column 让 .content 上下堆叠(原 .section 默认 row,导致 h2 + p 横排) -->
+            <section class="section section--text" style="flex-direction: column;">
+                <div class="content content--text">
+                    <h2 class="content__text-title" data-text-effect="23"><span data-text-effect-target>The Knight<br>Awakens</span></h2>
+                </div>
+                <div class="content content--text" data-text-effect="16">
+                    <p class="content__text" data-text-effect-target>From the stillness of the forest emerges a shadow that has always lived within. The fox once knew the language of wind and leaf, the quiet pulse of the earth beneath its paws. But a stillness deepens, and with it, a stirring it cannot name. The armor rises not as a betrayal, but as the inevitable return of what was always there. We resist the change, we cling to the soft fur, the nimble leap, the eyes that once saw only wonder. Yet the knight has been patient, waiting in the marrow of the bone, in the silence between breaths. To wear the helm is not to lose the fox, but to remember that all creatures carry armor in their blood. The forest does not mourn the shadow; the shadow was always part of the tree.</p>
+                </div>
+            </section>
+
+            <section class="section section--text section--text--right section--text--stack">
+                <div class="content content--text content--text--right">
+                    <h2 class="content__text-title content__text-title--small" data-text-effect="20"><span data-text-effect-target>Surrender<br>to the Tide</span></h2>
+                </div>
+                <div class="content content--text content--text--right" data-text-effect="16">
+                    <p class="content__text" data-text-effect-target>To surrender the helm is not to lose the warrior, but to remember that the warrior was always a question. The armor no longer fits. What once felt like purpose now reveals itself as weight, as walls, as the cage of a self we built to survive. The knight who charged forward now pauses, listening to a hum older than steel. To surrender is not defeat; it is the breath before the current takes us. The jellyfish knows no resistance, only drift, only the pulse of a bell that rings in water. And in that drift we find what fighting could never give: the grace of becoming, the soft hands of a thousand tendrils, the home that has always been waiting in the deep.</p>
+                </div>
+            </section>
+
+            <section class="section section--text section--text--left">
+                <div class="content content--text content--text--left">
+                    <h2 class="content__text-title content__text-title--small content__text-title--left" data-text-effect="28"><span data-text-effect-target>Where the Light Fades</span></h2>
+                </div>
+                <div class="content content--text content--text--left" data-text-effect="16">
+                    <p class="content__text" data-text-effect-target>The light does not reach where we are going, the current carries us deeper.</p>
+                    <p class="content__text" data-text-effect-target>We let go of the surface we once knew, finding a different kind of seeing.</p>
+                    <p class="content__text" data-text-effect-target>The jellyfish knows no resistance, only the pulse of a bell in water.</p>
+                    <p class="content__text" data-text-effect-target>In that drift we find what fighting could never give: grace and home in the deep.</p>
+                </div>
+            </section>
+
+            <section class="section section--text section--text--right section--text--stack">
+                <div class="content content--text content--text--right" data-text-effect="21">
+                    <h2 class="content__text-title content__text-title--small"><span data-text-effect-target>Rise from the Ashes</span></h2>
+                </div>
+                <div class="content content--text content--text--right" data-text-effect="16">
+                    <p class="content__text" data-text-effect-target>What burns is not destroyed, only transformed. The fire that consumes becomes the fire that births. From the embers of what was, something new takes flight.</p>
+                </div>
+            </section>
+
+            <section id="page-fairy" class="section section--text section--text--left">
+                <div class="content content--text content--text--left" data-text-effect="18">
+                    <h2 class="content__text-title content__text-title--small font-16 font-upper">
+                        <span data-text-effect-target>Where Wonder Dwells</span>
+                    </h2>
+                </div>
+                <div class="content content--text content--text--left" data-text-effect="16">
+                    <p class="content__text" data-text-effect-target>The forest sleeps beneath a quilt of snow, and the air itself seems to hold its breath. From the stillness, a single light stirs &mdash; first a flicker, then a glow, then a quiet companion who has walked these woods since the very first winter. The fairy does not arrive. She was always here, woven into the hush between branches, the hush between heartbeats. To see her is to remember that wonder is not something we chase across the sky, but something that finds us when we finally stop to listen. Tonight, the snow carries her name. Tonight, the world is a little lighter than it was.</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div style="width: 100%; height: 500dvh;"></div>
+</div>
+
+    <script type="module" src="./script.js"></script>
+</body>
+</html>

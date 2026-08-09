@@ -1,0 +1,625 @@
+*
+{
+    margin: 0;
+    padding: 0;
+
+    /*-ms-touch-action: none;*/
+    /*touch-action: none;*/
+}
+
+html,
+body
+{
+    background-color: #0e0e0e;  /* Tympanus demo-2 --color-bg */
+    overflow: hidden;
+}
+
+
+/*.wrapper {*/
+/*    color: white;*/
+/*    padding : 20px;*/
+/*    position: relative;*/
+/*    top: 0;*/
+/*    right: 0;*/
+/*    left: 0;*/
+/*    transition: all .5s linear;*/
+/*    transform-origin:0 0;*/
+/*    transform: translate3d(0px, 0px, 0px);*/
+/*    -webkit-backface-visibility: hidden;*/
+/*    -moz-backface-visibility: hidden;*/
+/*    -ms-backface-visibility: hidden;*/
+/*    backface-visibility: hidden;*/
+/*    -webkit-perspective: 1000;*/
+/*    -moz-perspective: 1000;*/
+/*    -ms-perspective: 1000;*/
+/*    perspective: 1000;*/
+
+/*    -webkit-box-sizing: border-box;*/
+/*    box-sizing: border-box;*/
+/*}*/
+
+
+.webgl
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
+}
+
+
+/********************* Preloader CSS *********************/
+
+#preloader {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 99999;
+    display: flex;
+}
+
+#preloader:before,
+#preloader:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    z-index: -1;
+    background-color: #0e0e0e;
+    -webkit-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+}
+
+#preloader:after {
+    left: auto;
+    right: 0;
+}
+
+#preloader .loader_line {
+    margin: auto;
+    width: 1px;
+    height: 75%;
+    position: relative;
+    overflow: hidden;
+    -webkit-transition: all 0.8s ease 0s;
+    -o-transition: all 0.8s ease 0s;
+    transition: all 0.8s ease 0s;
+}
+
+.loader_line:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 1px;
+    height: 0%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    background-color: #fff;
+    -webkit-animation: lineheight 1000ms ease-in-out 0s forwards;
+    -o-animation: lineheight 1000ms ease-in-out 0s forwards;
+    animation: lineheight 1000ms ease-in-out 0s forwards;
+}
+
+.loader_line:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background-color: #bbb;
+    -webkit-transform: translateY(-100%);
+    -ms-transform: translateY(-100%);
+    -o-transform: translateY(-100%);
+    transform: translateY(-100%);
+    -webkit-animation: lineround 1200ms linear 0s infinite;
+    -o-animation: lineround 1200ms linear 0s infinite;
+    animation: lineround 1200ms linear 0s infinite;
+    animation-delay: 2000ms;
+}
+
+@keyframes lineheight {
+    0% {
+        height: 0%;
+    }
+
+    100% {
+        height: 100%;
+    }
+}
+
+@keyframes lineround {
+    0% {
+        -webkit-transform: translateY(-100%);
+        -ms-transform: translateY(-100%);
+        -o-transform: translateY(-100%);
+        transform: translateY(-100%);
+    }
+
+    100% {
+        -webkit-transform: translateY(200%);
+        -ms-transform: translateY(200%);
+        -o-transform: translateY(200%);
+        transform: translateY(200%);
+    }
+}
+
+/*hiding all*/
+.preloaded .loader_line:after {
+    opacity: 0;
+}
+
+.preloaded .loader_line {
+    opacity: 0;
+    height: 100% !important;
+}
+
+.preloaded:before,
+.preloaded:after {
+    -webkit-animation: preloadedzero 1000ms ease-in-out 500ms forwards;
+    -o-animation: preloadedzero 1000ms ease-in-out 500ms forwards;
+    animation: preloadedzero 1000ms ease-in-out 500ms forwards;
+}
+
+@keyframes preloadedzero {
+    0% {
+        width: 50%;
+    }
+
+    100% {
+        width: 0%;
+    }
+}
+
+/********************* Preloader CSS *********************/
+
+
+/********************* Play  *********************/
+#play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    opacity: 0;
+    transition: opacity 1.0s ease-in;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #555555;
+    color: #ffffff;
+    cursor: pointer;
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+#play-button:hover {
+    background-color: #333333;
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.2);
+    transform: translate(-50%, -48%);
+}
+
+#play-icon {
+    margin-right: 5px;
+}
+
+#play-button.fade-in {
+    opacity: 1;
+}
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 1s ease-out;
+}
+/********************* End Play *********************/
+
+/********************* Sections *********************/
+.wrapper {
+    position: sticky;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.smooth {
+    display: block;
+    position: relative;
+    overflow: hidden auto;
+    will-change: transform;
+}
+
+.section
+{
+    display: flex;
+    align-items: center;
+    height: 100dvh;
+    position: relative;
+    font-family: 'Jost Medium', sans-serif;
+    color: #ddc4a4;
+    text-transform: uppercase;
+    font-size: 6vmin;
+    padding-left: 10%;
+    padding-right: 10%;
+    /*pointer-events: none;*/
+}
+
+section:nth-child(odd)
+{
+    justify-content: flex-end;
+}
+
+/* ===== 第1页 intro 布局(仿 Tympanus OnScrollTypography) ===== */
+.section--intro {
+    justify-content: center;  /* 覆盖 nth-child(odd) 的 flex-end,居中 */
+    padding: 0;
+    text-transform: none;       /* 覆盖 section 的 uppercase */
+    font-size: initial;          /* 覆盖 section 的 6vmin */
+    font-family: 'Jost', sans-serif;
+}
+
+.intro {
+    /* 第 1 页大字接力滚动: position: fixed 钉在屏幕中央 (grid place-items: center 居中),
+       等第二页标题完全滚出屏幕后, Page.js 通过 JS 设 transform: translateY(N) 1:1 同步上移
+       注意: 删掉了 will-change: transform, 因为它 + JS transform 会让某些浏览器
+       把 .intro 临时 promote 到独立 layer, 期间 position: fixed 的 containing block 被
+       .smooth will-change 抢走, 导致 fixed 不生效 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.intro__title {
+    place-items: center;
+    margin: 0;
+    font-weight: 300;
+    line-height: 0.9;
+    display: grid;
+    gap: 0.5rem;
+}
+
+.intro__title-pre {
+    text-transform: uppercase;
+    /* 老大要求原版 norman-stencil (Tympanus On-Scroll 原网页字体, typekit zda3gdw 提供)
+       fallback Big Shoulders Stencil Display (项目原有 Google Fonts 免费版, norman-stencil 加载失败时用) */
+    font-family: 'norman-stencil', 'Big Shoulders Stencil Display', sans-serif;
+    font-size: clamp(3rem, 12vw, 10rem);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    color: #ddc4a4;
+    line-height: 0.9;
+}
+
+.intro__title-sub {
+    font-family: 'Jost', sans-serif;
+    font-size: clamp(1rem, 3.5vw, 2.25rem);
+    font-weight: 500;
+    color: #ddc4a4;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.intro__title-sub sup {
+    margin-left: 0.2em;
+    font-size: 0.55em;
+    vertical-align: super;
+}
+
+.intro__info {
+    max-width: 22ch;
+    opacity: 0.55;
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #ddc4a4;
+    position: relative;
+}
+
+.intro__info:after {
+    content: "";
+    width: 1px;
+    height: 1.5rem;
+    background: #ddc4a4;  /* Tympanus demo-2 --color-text */
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    opacity: 0.7;
+}
+
+/* ===== 段2 Tympanus 风格长文字(effect16 风格:逐字旋转淡入) ===== */
+.section--text {
+    align-items: center;       /* 垂直居中 */
+    text-transform: none;       /* 覆盖 section 的 uppercase */
+    font-size: initial;          /* 覆盖 section 的 6vmin */
+}
+
+.section--text h2 {
+    position: static;            /* 覆盖 .section h2 的 absolute */
+    top: auto;
+    transform: none;
+    pointer-events: auto;
+    text-align: left;
+}
+
+.content--text {
+    max-width: 38vw;             /* Tympanus 风格,文字块不占满整宽 */
+    padding: 0;                  /* 借用 section 的 padding-left 10% */
+    text-align: left;
+}
+
+.content__text-title {
+    font-family: 'Jost', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);   /* Tympanus --font-size-title */
+    font-weight: 500;
+    line-height: 1;
+    color: #ddc4a4;
+    text-transform: none;
+    margin: 0 0 1.5rem 0;
+    letter-spacing: -0.01em;
+}
+
+/* ===== 段 2 标题 "The Knight Awakens" 大写 + 艺术字体 =====
+   :not(.content__text-title--small) 确保只影响段 2 这一个 h2
+   (段 3/4/5 h2 用了 .content__text-title--small, 用卤素/Cormorant, 不被这次改动影响) */
+.content__text-title:not(.content__text-title--small) {
+    font-family: 'Cinzel', serif;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+.content__text {
+    font-family: 'Jost', sans-serif;
+    font-size: clamp(1rem, 1.3vw, 1.3rem);   /* Tympanus --font-size-content */
+    line-height: 1.4;
+    color: #ddc4a4;
+    text-transform: none;
+    margin: 0;
+}
+
+.content__text .word {
+    display: inline-block;
+    /* opacity 0.1->1 and rotate 3->0 driven by GSAP.scrub (effect16) */
+    will-change: opacity, transform;
+}
+
+.content__text .word.word--in {
+    opacity: 1;
+    transform: rotate(0);
+}
+
+/* ===== 大标题×3(段3 / 段4 用, 段5 在 L412 用覆盖) ===== */
+.content__text-title--small {
+    /* 段 3 / 段 4 标题字体恢复为 halogen (老大指令, 视觉风格保留);
+       段 5 在下方 [data-text-effect='21'] 用 Cormorant Garamond 衬线覆盖 */
+    /* === Tympanus 原版字体(由 Typekit cvn8slu 提供)===
+       fallback 先 sans-serif / serif,字体加载失败不至于破版面 */
+    font-family: 'halogen', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 700;
+    font-size: clamp(3.75rem, 7.5vw, 6.75rem);
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 0.02em;
+    margin: 8rem 0 8rem 0;
+}
+
+/* ===== 第 6 页 (花仙子页面) 文字偏上 + 左对齐 =====
+   只针对 #page-fairy,不影响其他 .section--text--left 段(段 4) */
+#page-fairy {
+    flex-direction: column;          /* 标题在上,正文在下(.section 默认 row 会让两个 div 横排) */
+    align-items: flex-start;         /* 横向靠左 */
+    padding-top: 15vh;               /* 距视口顶部 15vh,文字在屏幕偏上 ~1/4 处 */
+}
+/* 标题左对齐: 覆盖 .content__text-title--small 全局的 text-align: center !important */
+#page-fairy h2.content__text-title--small {
+    text-align: left !important;
+}
+/* 段落也左对齐(继承 .section--text--left 的 text-align: left,这里加 max-width 同段 4) */
+#page-fairy .content--text {
+    max-width: 38vw;
+}
+
+/* ===== 段 5 (effect21 Rise from the Ashes)用 borax-variable =====
+   原版 Beauty remains 用 font-20 (borax-variable,优雅衬线) */
+div[data-text-effect="21"] h2.content__text-title--small {
+    font-family: 'Cormorant Garamond', 'Times New Roman', serif;  /* 原 wayfinder-cf,Typekit 解除依赖 — 改 Google Fonts 免费版 */
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 0;
+    text-transform: none;        /* 原版 Beauty remains 不全 uppercase */
+}
+
+/* ===== 段 3 (effect20 Surrender to the Tide)字距 ===== */
+h2[data-text-effect="20"].content__text-title--small {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 段 4 (effect28 Where the Light Fades)字距 ===== */
+h2[data-text-effect="28"].content__text-title--small {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    letter-spacing: 0.01em;
+}
+
+/* 覆盖 .section--text h2 的 text-align:left,让段3 大标题真正居中 */
+.content__text-title--small {
+    text-align: center !important;
+}
+
+/* ===== 偏右排版(段3 用) =====
+   整个文字块靠右放置,内部居中
+   大标题和小字都在一个容器里,统一居中 */
+.section--text--right {
+    justify-content: flex-end;
+}
+
+.section--text--right .content--text {
+    text-align: center;
+    max-width: 38vw;
+}
+
+/* 第3页:大标题在上,小字在下,竖排 */
+.section--text--stack {
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+/* ===== 靠左排版(段4 用) =====
+   整个文字块靠左放置,内部左对齐 */
+.section--text--left {
+    justify-content: flex-start;
+}
+
+.section--text--left .content--text {
+    text-align: left;
+    max-width: 38vw;
+}
+
+.content__text-title--left {
+    text-align: left !important;
+}
+
+/* ===== effect18 (Surrender to reality 风格,GSAP 驱动) =====
+   段 6 (effect18 Where Wonder Dwells) 字内逐字符从极远处(z=-800)飞近 + 回弹
+   原 demo 用 font-16 font-upper = inge-variable + uppercase,这里保持原 demo 类名
+   字号对齐其他大标题(clamp(3.75rem, 7.5vw, 6.75rem))
+   初始和结束全部由 GSAP fromTo 控制,CSS 只负责布局 */
+[data-text-effect="18"] .word {
+    white-space: nowrap;
+    display: inline-block;
+}
+[data-text-effect="18"] .char {
+    display: inline-block;
+}
+/* 段 6 effect18 专用字体覆盖: inge-variable (Tympanus 原 demo font-16)
+   fallback 到 cvn8slu 包内的 halogen (项目已有),再退到通用 sans-serif */
+div[data-text-effect="18"] h2.content__text-title--small {
+    font-family: 'inge-variable', 'halogen', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;     /* 原 demo font-upper */
+    margin: 8rem 0 8rem 0;
+}
+
+/* ===== effect20 (Waking / Life 风格) =====
+   每个字符从"躺平"立起来,随机顺序,像翻牌
+   初始 scaleY:0, opacity:0 → 结束 scaleY:1, opacity:1
+   transform-origin: 底部 50% 100%, 模拟绕 X 轴下翻
+   滚动可逆(滚下去立起来,滚回去躺平) */
+[data-text-effect="20"] .char {
+    display: inline-block;
+    opacity: 0;
+    transform-origin: 50% 100%;
+    will-change: opacity, transform;
+}
+
+/* ===== effect28 (绽放风格,GSAP 驱动) =====
+   词内逐字从中心向外绽放
+   初始和结束全部由 GSAP fromTo 控制,CSS 只负责布局 */
+[data-text-effect="28"] .word {
+    white-space: nowrap;
+    display: inline-block;
+}
+[data-text-effect="28"] .char {
+    display: inline-block;
+}
+
+
+
+/* ===== effect23 (Deeper Love Light 风格,GSAP 驱动) =====
+   奇偶 word 反方向缩放出现,具体:每 word 内 chars scale 0.01->1 + x 偏移归零
+   初始/结束全部由 GSAP fromTo 控制,CSS 只负责布局 */
+[data-text-effect="23"] .word {
+    white-space: nowrap;
+    display: inline-block;
+}
+[data-text-effect="23"] .char {
+    display: inline-block;
+}
+/* ===== effect21 (Beauty remains 风格,GSAP 驱动) =====
+   词内逐字:从极小(0.05)转着(±720°)飞进来再归位
+   初始和结束全部由 GSAP fromTo 控制 */
+[data-text-effect="21"] .word {
+    white-space: nowrap;
+    display: inline-block;
+}
+[data-text-effect="21"] .char {
+    display: inline-block;
+}
+
+#fake-scroll {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden auto;
+    top: 0px;
+    left: 0px;
+}
+
+/********************* End Sections *********************/
+
+
+
+/******************** Replay button ********************/
+#replay-btn {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 100001;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px;
+    background-color: rgba(85, 85, 85, 0.85);
+    color: #ffffff;
+    font-family: 'Jost', sans-serif;
+    font-size: 15px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+}
+#replay-btn:hover {
+    background-color: rgba(51, 51, 51, 0.95);
+}
+#replay-btn.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
+/******************** Disable text selection (left-drag rotates, must not select headings) ********************/
+body {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

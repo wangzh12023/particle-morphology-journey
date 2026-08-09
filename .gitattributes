@@ -1,0 +1,4 @@
+*.glb binary
+*.frag text
+*.vert text
+*.glsl text
