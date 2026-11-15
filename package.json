@@ -1,12 +1,23 @@
 {
-  "name": "jl-particles",
-  "private": true,
-  "version": "0.0.0",
+  "name": "particle-morphology-journey",
+  "version": "1.0.0",
+  "description": "An immersive Three.js & GLSL particle morphology and narrative visual experience.",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "preview": "vite preview"
   },
+  "keywords": [
+    "threejs",
+    "glsl",
+    "particles",
+    "morphing",
+    "webgl",
+    "creative-coding"
+  ],
+  "author": "Zihan Wang",
+  "license": "MIT",
   "devDependencies": {
     "three": "^0.164.1",
     "vite": "^4.4.9",

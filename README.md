@@ -1,23 +1,56 @@
 # Particle Morphology Journey
 
-一个基于 Three.js 的沉浸式粒子形态演化网页：滚动页面，探索狐狸、骑士、水母、凤凰和精灵之间的粒子变形。
+An immersive WebGL visual narrative built with Three.js and custom GLSL shaders. Explore fluid particle transitions across mythical forms (Fox, Knight, Jellyfish, Phoenix, and Fairy) synchronized with scroll-driven storytelling.
 
-## 开始使用
+## Tech Stack
 
-需要 Node.js 18 或更高版本。
+- **Renderer:** Three.js + GLSL Shaders (Vite GLSL plugin)
+- **Animation & Scroll:** GSAP, Locomotive Scroll, Lenis
+- **Build Tool:** Vite
 
-```bash
-npm install
-npm run dev
+## Project Structure
+
+```text
+particle-morphology-journey/
+├── src/
+│   ├── Experience/
+│   │   ├── Camera.js              # Camera manager & controls
+│   │   ├── Experience.js          # Core singleton orchestrator
+│   │   ├── Renderer.js            # WebGL renderer setup & post-processing
+│   │   ├── sources.js             # Asset definitions (3D models)
+│   │   ├── Shaders/               # GLSL vertex & fragment shaders
+│   │   │   ├── Particles/         # Particle simulation & morphing shaders
+│   │   │   ├── Fox/               # Fox animation & holographic shaders
+│   │   │   └── Stars/             # Atmospheric star field shaders
+│   │   ├── Utils/                 # Sizes, Time, FBO, Sound, Debug tools
+│   │   └── World/                 # World, Environment, and Page layout
+│   ├── index.html                 # HTML entry with narrative sections
+│   ├── script.js                  # Application entry point
+│   └── style.css                  # Typography and layout styles
+├── static/
+│   └── models/                    # 3D GLTF/GLB models for morphing targets
+├── package.json
+└── vite.config.js
 ```
 
-Vite 会在终端输出本地预览地址。构建生产版本：
+## Getting Started
 
 ```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
 npm run build
 ```
 
-## 交互方式
+## Controls
 
-- 滚动：推进或回退叙事与粒子形态
-- 鼠标拖动：旋转视角
+- **Scroll:** Drive forward / backward through the narrative and particle morphing stages
+- **Mouse Drag:** Rotate 3D perspective
+
+## License
+
+MIT
